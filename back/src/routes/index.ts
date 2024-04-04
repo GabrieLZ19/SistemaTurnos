@@ -8,4 +8,5 @@ router.use("/users", userRoutes);
 
 router.use("/appointments", appointmentRoutes);
 
+router.use("/appointment", appointmentRoutes);
 export default router;
