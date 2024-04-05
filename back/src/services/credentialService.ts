@@ -1,30 +1,65 @@
+import { ICredentialDto } from "../dtos/ICredentialDto";
 import { ICredential } from "../interfaces/ICredential";
 
 const credenciales: ICredential[] = [];
-let id: number = 0;
+let credentialId: number = 1;
 
-export const crearCredencial = (
-  username: string,
-  password: string
-): ICredential => {
-  id++;
-  const credencial: ICredential = {
-    id,
-    username,
-    password,
+export const crearCredencial = async (
+  credentialDto: ICredentialDto
+): Promise<number> => {
+  const nuevaCredential: ICredential = {
+    id: credentialId++,
+    username: credentialDto.username,
+    password: credentialDto.password,
   };
 
-  credenciales.push(credencial);
+  credenciales.push(nuevaCredential);
 
-  return credencial;
+  return nuevaCredential.id;
 };
 
-export const buscarCredencial = (username: string, password: string) => {
-  credenciales.filter((elemento) => {
-    if (elemento.username === username) {
-      if (elemento.password === password) {
-        return elemento.id;
-      }
-    }
-  });
+export const buscarCredencial = async (
+  credencialDto: ICredentialDto
+): Promise<number> => {
+  const { username, password } = credencialDto;
+
+  const encontrarCredential = credenciales.find(
+    (credential) =>
+      credential.username === username && credential.password === password
+  );
+
+  if (
+    encontrarCredential &&
+    encontrarCredential.username === username &&
+    encontrarCredential.password === password
+  ) {
+    return encontrarCredential.id;
+  } else {
+    throw Error("Credenciales incorrectas");
+  }
+
+  // credenciales.filter((elemento) => {
+  //   if (elemento.username === username) {
+  //     if (elemento.password === password) {
+  //       return elemento.id;
+  //     }
+  //   }
+  // });
 };
+
+// export const crearCredencial = (
+//   username: string,
+//   password: string
+// ): ICredential => {
+//   const id: number = credentialId++;
+
+//   const credencial: ICredential = {
+//     id,
+//     username,
+//     password,
+//   };
+
+//   credenciales.push(credencial);
+
+//   return credencial;
+// };

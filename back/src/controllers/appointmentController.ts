@@ -12,7 +12,7 @@ export const obtenerTurnos = async (req: Request, res: Response) => {
     const turnos: IAppointment[] = await obtenerTurnosService();
     res.status(200).json(turnos);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(400).json(error);
   }
 };
 
@@ -23,7 +23,7 @@ export const obtenerTurnoEspecifico = async (req: Request, res: Response) => {
 
     res.status(200).json(turno);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(400).json(error);
   }
 };
 
@@ -42,7 +42,7 @@ export const agendarTurno = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: "Turno creado", user: BDturno });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(400).json(error);
   }
 };
 
@@ -50,6 +50,6 @@ export const cambiarEstatusTurno = async (req: Request, res: Response) => {
   try {
     res.send("Se cambio el estatus de un turno a “cancelled”");
   } catch (error) {
-    res.status(500).json(error);
+    res.status(400).json(error);
   }
 };
