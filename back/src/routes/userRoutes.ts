@@ -10,8 +10,8 @@ import {
 const userRoutes: Router = Router();
 
 userRoutes.get("/", obtenerUsuarios);
+userRoutes.get("/:id", obtenerUsuarioID);
 userRoutes.post("/register", registrarUsuario);
 userRoutes.post("/login", loguearUsuario);
-userRoutes.get("/:id", obtenerUsuarioID);
 
 export default userRoutes;

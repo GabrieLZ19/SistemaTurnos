@@ -10,7 +10,7 @@ import {
 const appointmentRoutes: Router = Router();
 
 appointmentRoutes.get("/", obtenerTurnos);
-appointmentRoutes.get("/", obtenerTurnoEspecifico);
+appointmentRoutes.get("/:id", obtenerTurnoEspecifico);
 appointmentRoutes.post("/schedule", agendarTurno);
 appointmentRoutes.post("/cancel", cambiarEstatusTurno);
 
