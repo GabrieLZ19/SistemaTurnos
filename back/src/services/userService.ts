@@ -1,12 +1,13 @@
+import { credentialModel, userModel } from "../config/data-source";
 import { IUserDto } from "../dtos/IUserDto";
-import { IUser } from "../interfaces/IUser";
+import { Credential } from "../entities/Credencial";
+import { User } from "../entities/User";
 import { crearCredencial } from "./credentialService";
 
-const users: IUser[] = [];
-let userID: number = 1;
-
-export const obtenerUsuariosService = async (): Promise<IUser[]> => {
-  const usuarios: IUser[] = users;
+export const obtenerUsuariosService = async (): Promise<User[]> => {
+  const usuarios: User[] = await userModel.find({
+    relations: { credential: true },
+  });
 
   if (!usuarios) {
     throw Error(" Error de la base de datos al buscar usuarios");
@@ -15,52 +16,18 @@ export const obtenerUsuariosService = async (): Promise<IUser[]> => {
   }
 };
 
-export const obtenerUsuarioIDService = async (id: number): Promise<IUser> => {
-  const usuarioEncontrado: IUser | undefined = users.find(
-    (user) => user.id === id
-  );
+export const obtenerUsuarioIDService = async (id: number): Promise<User> => {
+  const usuario = await userModel.findOneBy({ id: id });
 
-  if (!usuarioEncontrado)
-    throw Error("No se encontro ningun usuario con ese ID");
+  if (!usuario) throw Error("No se encontro ningun usuario con ese ID");
 
-  return usuarioEncontrado;
+  return usuario;
 };
 
-export const crearUsuarioService = async (params: IUserDto): Promise<IUser> => {
-  const nuevaCredential: number = await crearCredencial({
-    username: params.username,
-    password: params.password,
-  });
+export const crearUsuarioService = async (usuario: IUserDto): Promise<User> => {
+  const newUsuario = await userModel.create(usuario);
 
-  const usuarioNuevo: IUser = {
-    id: userID++,
-    name: params.name,
-    email: params.email,
-    birthdate: params.birthdate,
-    nDni: params.nDni,
-    credentialId: nuevaCredential,
-  };
+  await userModel.save(usuario);
 
-  users.push(usuarioNuevo);
-
-  return usuarioNuevo;
+  return newUsuario;
 };
-
-// export const crearUsuarioService = async (
-//   usuario: Omit<IUser, "id">
-// ): Promise<IUser> => {
-//   const id: number = userID++;
-
-//   const user: IUser = {
-//     id,
-//     name: usuario.name,
-//     email: usuario.email,
-//     birthdate: usuario.birthdate,
-//     nDni: usuario.nDni,
-//     credentialId: usuario.credentialId,
-//   };
-
-//   users.push(user);
-
-//   return user;
-// };

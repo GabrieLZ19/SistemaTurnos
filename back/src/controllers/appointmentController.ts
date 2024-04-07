@@ -6,12 +6,14 @@ import {
   obtenerTurnoIdService,
   obtenerTurnosService,
 } from "../services/appointmentService";
-import { crearUsuarioService } from "../services/userService";
 import { IAppointmentDto } from "../dtos/IAppointmentDto";
+import { Turno } from "../entities/Turno";
+import { User } from "../entities/User";
+import { obtenerUsuarioIDService } from "../services/userService";
 
 export const obtenerTurnos = async (req: Request, res: Response) => {
   try {
-    const turnos: IAppointment[] = await obtenerTurnosService();
+    const turnos: Turno[] = await obtenerTurnosService();
     res.status(200).json(turnos);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
@@ -21,7 +23,7 @@ export const obtenerTurnos = async (req: Request, res: Response) => {
 export const obtenerTurnoEspecifico = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const turno: IAppointment = await obtenerTurnoIdService(parseInt(id));
+    const turno: Turno = await obtenerTurnoIdService(parseInt(id));
 
     res.status(200).json(turno);
   } catch (error: any) {
@@ -31,13 +33,15 @@ export const obtenerTurnoEspecifico = async (req: Request, res: Response) => {
 
 export const agendarTurno = async (req: Request, res: Response) => {
   try {
-    const { date, time, userId, status }: IAppointmentDto = req.body;
+    const { date, time, status, user }: IAppointmentDto = req.body;
 
-    const BDturno: IAppointment = await crearTurnoService({
+    const usuario: User = await obtenerUsuarioIDService(user.id);
+
+    const BDturno: Turno = await crearTurnoService({
       date,
       time,
-      userId,
       status,
+      user: usuario,
     });
 
     res.status(201).json({ message: "Turno creado", turno: BDturno });
@@ -50,9 +54,9 @@ export const cambiarEstatusTurno = async (req: Request, res: Response) => {
   try {
     const { id } = req.body;
 
-    const turnoEncontrado: IAppointment = await obtenerTurnoIdService(id);
+    const turnoEncontrado: Turno = await obtenerTurnoIdService(id);
 
-    const turnoModificado: IAppointment = await cambiarEstatusTurnoService(
+    const turnoModificado: Turno = await cambiarEstatusTurnoService(
       turnoEncontrado
     );
 

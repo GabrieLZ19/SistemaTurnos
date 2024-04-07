@@ -1,21 +1,15 @@
+import { credentialModel, userModel } from "../config/data-source";
 import { ICredentialDto } from "../dtos/ICredentialDto";
-import { ICredential } from "../interfaces/ICredential";
-
-const credenciales: ICredential[] = [];
-let credentialId: number = 1;
+import { Credential } from "../entities/Credencial";
 
 export const crearCredencial = async (
-  credentialDto: ICredentialDto
-): Promise<number> => {
-  const nuevaCredential: ICredential = {
-    id: credentialId++,
-    username: credentialDto.username,
-    password: credentialDto.password,
-  };
+  credential: ICredentialDto
+): Promise<Credential> => {
+  const credencial: Credential = await credentialModel.create(credential);
 
-  credenciales.push(nuevaCredential);
+  await credentialModel.save(credencial);
 
-  return nuevaCredential.id;
+  return credencial;
 };
 
 export const buscarCredencial = async (
@@ -23,43 +17,14 @@ export const buscarCredencial = async (
 ): Promise<number> => {
   const { username, password } = credencialDto;
 
-  const encontrarCredential = credenciales.find(
-    (credential) =>
-      credential.username === username && credential.password === password
-  );
+  const encontrarCredential = await credentialModel.findOneBy({
+    username: username,
+    password: password,
+  });
 
-  if (
-    encontrarCredential &&
-    encontrarCredential.username === username &&
-    encontrarCredential.password === password
-  ) {
-    return encontrarCredential.id;
+  if (!encontrarCredential) {
+    throw Error(" Credenciales incorrectas");
   } else {
-    throw Error("Credenciales incorrectas");
+    return encontrarCredential.id;
   }
-
-  // credenciales.filter((elemento) => {
-  //   if (elemento.username === username) {
-  //     if (elemento.password === password) {
-  //       return elemento.id;
-  //     }
-  //   }
-  // });
 };
-
-// export const crearCredencial = (
-//   username: string,
-//   password: string
-// ): ICredential => {
-//   const id: number = credentialId++;
-
-//   const credencial: ICredential = {
-//     id,
-//     username,
-//     password,
-//   };
-
-//   credenciales.push(credencial);
-
-//   return credencial;
-// };
