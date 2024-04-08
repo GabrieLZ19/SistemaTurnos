@@ -14,9 +14,10 @@ export const crearCredencial = async (
   (newCredencial.username = credencials.username),
     (newCredencial.password = credencials.password);
 
-  credentialModel.save(newCredencial);
+  const bdCredencial = await credentialModel.create(newCredencial);
+  await credentialModel.save(bdCredencial);
 
-  return newCredencial;
+  return bdCredencial;
 };
 
 export const buscarCredencial = async (

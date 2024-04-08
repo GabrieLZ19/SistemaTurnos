@@ -1,6 +1,8 @@
 import { turnModel } from "../config/data-source";
 import { IAppointmentDto } from "../dtos/IAppointmentDto";
 import { Appointment } from "../entities/Turno";
+import { User } from "../entities/User";
+import { obtenerUsuarioIDService } from "./userService";
 
 export const obtenerTurnosService = async (): Promise<Appointment[]> => {
   const turns: Appointment[] = await turnModel.find({
@@ -27,11 +29,20 @@ export const obtenerTurnoIdService = async (
 export const crearTurnoService = async (
   turno: IAppointmentDto
 ): Promise<Appointment> => {
-  const newTurn = await turnModel.create(turno);
+  const usuario: User = await obtenerUsuarioIDService(turno.user);
 
-  await turnModel.save(newTurn);
+  const newTurn: Appointment = new Appointment();
 
-  return newTurn;
+  (newTurn.date = turno.date),
+    (newTurn.status = turno.status),
+    (newTurn.time = turno.time),
+    (newTurn.user = usuario);
+
+  const dbTurno = await turnModel.create(newTurn);
+
+  await turnModel.save(dbTurno);
+
+  return dbTurno;
 };
 
 export const cambiarEstatusTurnoService = async (
@@ -39,7 +50,12 @@ export const cambiarEstatusTurnoService = async (
 ): Promise<Appointment> => {
   if (turno.status === "active") {
     turno.status = "cancelled";
+  } else {
+    throw Error("El Status ya es Cancelled");
   }
+  const turnoModificado = await turnModel.create(turno);
 
-  return turno;
+  await turnModel.save(turnoModificado);
+
+  return turnoModificado;
 };

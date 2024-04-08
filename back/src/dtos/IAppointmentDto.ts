@@ -4,5 +4,5 @@ export interface IAppointmentDto {
   date: Date;
   time: number;
   status: "active" | "cancelled";
-  user: User;
+  user: number;
 }

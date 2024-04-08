@@ -35,13 +35,11 @@ export const agendarTurno = async (req: Request, res: Response) => {
   try {
     const { date, time, status, user }: IAppointmentDto = req.body;
 
-    const usuario: User = await obtenerUsuarioIDService(user.id);
-
     const BDturno: Appointment = await crearTurnoService({
       date,
       time,
       status,
-      user: usuario,
+      user,
     });
 
     res.status(201).json({ message: "Turno creado", turno: BDturno });

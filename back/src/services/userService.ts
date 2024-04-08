@@ -6,7 +6,7 @@ import { crearCredencial } from "./credentialService";
 
 export const obtenerUsuariosService = async (): Promise<User[]> => {
   const usuarios: User[] = await userModel.find({
-    relations: { credential: true },
+    relations: { credential: false },
   });
 
   if (!usuarios) {
@@ -38,7 +38,8 @@ export const crearUsuarioService = async (params: IUserDto): Promise<User> => {
     (newUser.nDni = params.nDni),
     (newUser.credential = newCredencial);
 
-  userModel.save(newUser);
+  const bdUser = await userModel.create(newUser);
+  await userModel.save(bdUser);
 
-  return newUser;
+  return bdUser;
 };
