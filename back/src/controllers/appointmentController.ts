@@ -7,13 +7,13 @@ import {
   obtenerTurnosService,
 } from "../services/appointmentService";
 import { IAppointmentDto } from "../dtos/IAppointmentDto";
-import { Turno } from "../entities/Turno";
 import { User } from "../entities/User";
 import { obtenerUsuarioIDService } from "../services/userService";
+import { Appointment } from "../entities/Turno";
 
 export const obtenerTurnos = async (req: Request, res: Response) => {
   try {
-    const turnos: Turno[] = await obtenerTurnosService();
+    const turnos: Appointment[] = await obtenerTurnosService();
     res.status(200).json(turnos);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
@@ -23,7 +23,7 @@ export const obtenerTurnos = async (req: Request, res: Response) => {
 export const obtenerTurnoEspecifico = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const turno: Turno = await obtenerTurnoIdService(parseInt(id));
+    const turno: Appointment = await obtenerTurnoIdService(parseInt(id));
 
     res.status(200).json(turno);
   } catch (error: any) {
@@ -37,7 +37,7 @@ export const agendarTurno = async (req: Request, res: Response) => {
 
     const usuario: User = await obtenerUsuarioIDService(user.id);
 
-    const BDturno: Turno = await crearTurnoService({
+    const BDturno: Appointment = await crearTurnoService({
       date,
       time,
       status,
@@ -54,9 +54,9 @@ export const cambiarEstatusTurno = async (req: Request, res: Response) => {
   try {
     const { id } = req.body;
 
-    const turnoEncontrado: Turno = await obtenerTurnoIdService(id);
+    const turnoEncontrado: Appointment = await obtenerTurnoIdService(id);
 
-    const turnoModificado: Turno = await cambiarEstatusTurnoService(
+    const turnoModificado: Appointment = await cambiarEstatusTurnoService(
       turnoEncontrado
     );
 

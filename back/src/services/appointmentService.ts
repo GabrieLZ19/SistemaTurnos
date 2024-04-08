@@ -1,13 +1,9 @@
 import { turnModel } from "../config/data-source";
 import { IAppointmentDto } from "../dtos/IAppointmentDto";
-import { Turno } from "../entities/Turno";
-import { User } from "../entities/User";
-import { IAppointment } from "../interfaces/IAppointment";
-import { IUser } from "../interfaces/IUser";
-import { obtenerUsuarioIDService } from "./userService";
+import { Appointment } from "../entities/Turno";
 
-export const obtenerTurnosService = async (): Promise<Turno[]> => {
-  const turns: Turno[] = await turnModel.find({
+export const obtenerTurnosService = async (): Promise<Appointment[]> => {
+  const turns: Appointment[] = await turnModel.find({
     relations: { user: true },
   });
 
@@ -18,7 +14,9 @@ export const obtenerTurnosService = async (): Promise<Turno[]> => {
   }
 };
 
-export const obtenerTurnoIdService = async (id: number): Promise<Turno> => {
+export const obtenerTurnoIdService = async (
+  id: number
+): Promise<Appointment> => {
   const turno = await turnModel.findOneBy({ id: id });
 
   if (!turno) throw Error("No se encontro ningun turno con ese ID");
@@ -28,7 +26,7 @@ export const obtenerTurnoIdService = async (id: number): Promise<Turno> => {
 
 export const crearTurnoService = async (
   turno: IAppointmentDto
-): Promise<Turno> => {
+): Promise<Appointment> => {
   const newTurn = await turnModel.create(turno);
 
   await turnModel.save(newTurn);
@@ -37,8 +35,8 @@ export const crearTurnoService = async (
 };
 
 export const cambiarEstatusTurnoService = async (
-  turno: Turno
-): Promise<Turno> => {
+  turno: Appointment
+): Promise<Appointment> => {
   if (turno.status === "active") {
     turno.status = "cancelled";
   }
