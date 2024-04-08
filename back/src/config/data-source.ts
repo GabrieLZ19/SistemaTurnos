@@ -11,7 +11,7 @@ export const AppDataSource = new DataSource({
   port: 5432,
   username: "postgres",
   password: process.env.PASSWORD,
-  database: "proyectoorm",
+  database: "sistematurnos",
   // dropSchema: true,
   synchronize: true,
   logging: false,
