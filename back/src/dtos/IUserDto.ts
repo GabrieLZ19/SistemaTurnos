@@ -5,5 +5,6 @@ export interface IUserDto {
   email: string;
   birthdate: Date;
   nDni: number;
-  credential: Credential;
+  username: string;
+  password: string;
 }

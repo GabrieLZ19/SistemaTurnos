@@ -1,15 +1,22 @@
-import { credentialModel, userModel } from "../config/data-source";
+import {
+  AppDataSource,
+  credentialModel,
+  userModel,
+} from "../config/data-source";
 import { ICredentialDto } from "../dtos/ICredentialDto";
 import { Credential } from "../entities/Credencial";
 
 export const crearCredencial = async (
-  credential: ICredentialDto
+  credencials: ICredentialDto
 ): Promise<Credential> => {
-  const credencial: Credential = await credentialModel.create(credential);
+  const newCredencial: Credential = new Credential();
 
-  await credentialModel.save(credencial);
+  (newCredencial.username = credencials.username),
+    (newCredencial.password = credencials.password);
 
-  return credencial;
+  credentialModel.save(newCredencial);
+
+  return newCredencial;
 };
 
 export const buscarCredencial = async (

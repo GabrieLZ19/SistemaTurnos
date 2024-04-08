@@ -32,14 +32,13 @@ export const registrarUsuario = async (req: Request, res: Response) => {
   try {
     const { name, email, birthdate, nDni, username, password } = req.body;
 
-    const credencial = await crearCredencial({ username, password });
-
     const usuario: User = await crearUsuarioService({
       name,
       email,
       birthdate,
       nDni,
-      credential: credencial,
+      username,
+      password,
     });
 
     res.status(201).json({ message: "Usuario creado", user: usuario });

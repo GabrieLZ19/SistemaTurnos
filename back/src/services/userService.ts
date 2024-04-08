@@ -1,4 +1,4 @@
-import { credentialModel, userModel } from "../config/data-source";
+import { userModel } from "../config/data-source";
 import { IUserDto } from "../dtos/IUserDto";
 import { Credential } from "../entities/Credencial";
 import { User } from "../entities/User";
@@ -24,10 +24,21 @@ export const obtenerUsuarioIDService = async (id: number): Promise<User> => {
   return usuario;
 };
 
-export const crearUsuarioService = async (usuario: IUserDto): Promise<User> => {
-  const newUsuario = await userModel.create(usuario);
+export const crearUsuarioService = async (params: IUserDto): Promise<User> => {
+  const newCredencial: Credential = await crearCredencial({
+    username: params.username,
+    password: params.password,
+  });
 
-  await userModel.save(usuario);
+  const newUser: User = new User();
 
-  return newUsuario;
+  (newUser.name = params.name),
+    (newUser.email = params.email),
+    (newUser.birthdate = params.birthdate),
+    (newUser.nDni = params.nDni),
+    (newUser.credential = newCredencial);
+
+  userModel.save(newUser);
+
+  return newUser;
 };
