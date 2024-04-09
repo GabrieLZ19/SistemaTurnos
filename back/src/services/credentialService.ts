@@ -1,6 +1,6 @@
 import CredentialRepository from "../repositories/CredentialRepository";
 import { ICredentialDto } from "../dtos/ICredentialDto";
-import { Credential } from "../entities/Credencial";
+import { Credential } from "../entities/Credential";
 
 export const crearCredencial = async (
   credencials: ICredentialDto

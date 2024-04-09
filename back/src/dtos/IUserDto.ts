@@ -1,4 +1,4 @@
-import { Credential } from "../entities/Credencial";
+import { Credential } from "../entities/Credential";
 
 export interface IUserDto {
   name: string;

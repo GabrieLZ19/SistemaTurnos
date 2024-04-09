@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 import "dotenv/config";
 
 import { User } from "../entities/User";
-import { Credential } from "../entities/Credencial";
+import { Credential } from "../entities/Credential";
 import { Appointment } from "../entities/Appointment";
 import { DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from "./envs";
 

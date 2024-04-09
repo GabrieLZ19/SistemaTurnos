@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Credential } from "./Credencial";
+import { Credential } from "./Credential";
 import { Appointment } from "./Appointment";
 
 @Entity({ name: "usuarios" })

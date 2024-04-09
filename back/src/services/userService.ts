@@ -1,7 +1,7 @@
 import UserRepository from "../repositories/UserRepository";
 import { ICredentialDto } from "../dtos/ICredentialDto";
 import { IUserDto } from "../dtos/IUserDto";
-import { Credential } from "../entities/Credencial";
+import { Credential } from "../entities/Credential";
 import { User } from "../entities/User";
 import { buscarCredencial, crearCredencial } from "./credentialService";
 
