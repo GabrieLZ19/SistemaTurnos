@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { IAppointment } from "../interfaces/IAppointment";
 import {
   cambiarEstatusTurnoService,
   crearTurnoService,
