@@ -12,6 +12,6 @@ const appointmentRoutes: Router = Router();
 appointmentRoutes.get("/", obtenerTurnos);
 appointmentRoutes.get("/:id", obtenerTurnoEspecifico);
 appointmentRoutes.post("/schedule", agendarTurno);
-appointmentRoutes.put("/cancel", cambiarEstatusTurno);
+appointmentRoutes.put("/cancel/:id", cambiarEstatusTurno);
 
 export default appointmentRoutes;

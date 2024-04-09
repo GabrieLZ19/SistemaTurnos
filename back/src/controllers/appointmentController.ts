@@ -52,9 +52,11 @@ export const agendarTurno = async (req: Request, res: Response) => {
 
 export const cambiarEstatusTurno = async (req: Request, res: Response) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
 
-    const turnoEncontrado: Appointment = await obtenerTurnoIdService(id);
+    const turnoEncontrado: Appointment = await obtenerTurnoIdService(
+      parseInt(id)
+    );
 
     const turnoModificado: Appointment = await cambiarEstatusTurnoService(
       turnoEncontrado
