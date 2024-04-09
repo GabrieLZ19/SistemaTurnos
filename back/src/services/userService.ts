@@ -1,12 +1,13 @@
 import { userModel } from "../config/data-source";
+import { ICredentialDto } from "../dtos/ICredentialDto";
 import { IUserDto } from "../dtos/IUserDto";
 import { Credential } from "../entities/Credencial";
 import { User } from "../entities/User";
-import { crearCredencial } from "./credentialService";
+import { buscarCredencial, crearCredencial } from "./credentialService";
 
 export const obtenerUsuariosService = async (): Promise<User[]> => {
   const usuarios: User[] = await userModel.find({
-    relations: { credential: false },
+    relations: { turno: true },
   });
 
   if (!usuarios) {
@@ -17,7 +18,10 @@ export const obtenerUsuariosService = async (): Promise<User[]> => {
 };
 
 export const obtenerUsuarioIDService = async (id: number): Promise<User> => {
-  const usuario = await userModel.findOneBy({ id: id });
+  const usuario: User | null = await userModel.findOne({
+    relations: { turno: true },
+    where: { id: id },
+  });
 
   if (!usuario) throw Error("No se encontro ningun usuario con ese ID");
 
@@ -42,4 +46,20 @@ export const crearUsuarioService = async (params: IUserDto): Promise<User> => {
   await userModel.save(bdUser);
 
   return bdUser;
+};
+
+export const loginUsuarioService = async (
+  params: ICredentialDto
+): Promise<User> => {
+  const validar = await buscarCredencial(params);
+
+  if (!validar) {
+    throw Error("Credenciales invalidas");
+  }
+
+  const usuario: User | null = await userModel.findOneBy({ id: validar });
+
+  if (!usuario) throw Error("No se encontro ningun usuario");
+
+  return usuario;
 };

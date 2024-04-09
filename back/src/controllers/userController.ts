@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import {
   crearUsuarioService,
+  loginUsuarioService,
   obtenerUsuarioIDService,
   obtenerUsuariosService,
 } from "../services/userService";
 
-import { IUserDto } from "../dtos/IUserDto";
 import { User } from "../entities/User";
-import { crearCredencial } from "../services/credentialService";
+import { ICredentialDto } from "../dtos/ICredentialDto";
 
 export const obtenerUsuarios = async (req: Request, res: Response) => {
   try {
@@ -24,7 +24,7 @@ export const obtenerUsuarioID = async (req: Request, res: Response) => {
     const usuario: User = await obtenerUsuarioIDService(parseInt(id));
     res.status(200).json(usuario);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
@@ -43,14 +43,18 @@ export const registrarUsuario = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: "Usuario creado", user: usuario });
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).json({ message: "Datos incorrectos" });
   }
 };
 
 export const loguearUsuario = async (req: Request, res: Response) => {
   try {
-    res.send("Se logueo exitosamente");
+    const { username, password }: ICredentialDto = req.body;
+
+    const usuario: User = await loginUsuarioService({ username, password });
+
+    res.status(200).json({ login: true, user: usuario });
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).json({ message: "Credenciales invalidas" });
   }
 };

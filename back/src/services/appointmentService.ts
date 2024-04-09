@@ -1,12 +1,13 @@
-import { turnModel } from "../config/data-source";
+import { error } from "console";
+import { turnModel, userModel } from "../config/data-source";
 import { IAppointmentDto } from "../dtos/IAppointmentDto";
-import { Appointment } from "../entities/Turno";
+import { Appointment } from "../entities/Appointment";
 import { User } from "../entities/User";
 import { obtenerUsuarioIDService } from "./userService";
 
 export const obtenerTurnosService = async (): Promise<Appointment[]> => {
   const turns: Appointment[] = await turnModel.find({
-    relations: { user: true },
+    relations: { userId: true },
   });
 
   if (!turns) {
@@ -29,14 +30,20 @@ export const obtenerTurnoIdService = async (
 export const crearTurnoService = async (
   turno: IAppointmentDto
 ): Promise<Appointment> => {
-  const usuario: User = await obtenerUsuarioIDService(turno.user);
+  const usuario = await userModel.findOneBy({
+    id: turno.userId,
+  });
+
+  if (!usuario) {
+    throw Error("La ID del usuario no existe");
+  }
 
   const newTurn: Appointment = new Appointment();
 
   (newTurn.date = turno.date),
     (newTurn.status = turno.status),
     (newTurn.time = turno.time),
-    (newTurn.user = usuario);
+    (newTurn.userId = usuario);
 
   const dbTurno = await turnModel.create(newTurn);
 

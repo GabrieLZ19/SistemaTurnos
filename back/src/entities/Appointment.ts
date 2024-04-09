@@ -16,5 +16,5 @@ export class Appointment {
   status: "active" | "cancelled";
 
   @ManyToOne(() => User, (user) => user.turno)
-  user: User;
+  userId: User;
 }

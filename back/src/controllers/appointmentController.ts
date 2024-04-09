@@ -7,9 +7,7 @@ import {
   obtenerTurnosService,
 } from "../services/appointmentService";
 import { IAppointmentDto } from "../dtos/IAppointmentDto";
-import { User } from "../entities/User";
-import { obtenerUsuarioIDService } from "../services/userService";
-import { Appointment } from "../entities/Turno";
+import { Appointment } from "../entities/Appointment";
 
 export const obtenerTurnos = async (req: Request, res: Response) => {
   try {
@@ -27,24 +25,28 @@ export const obtenerTurnoEspecifico = async (req: Request, res: Response) => {
 
     res.status(200).json(turno);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(404).json({ message: "El turno especificado no existe" });
   }
 };
 
 export const agendarTurno = async (req: Request, res: Response) => {
   try {
-    const { date, time, status, user }: IAppointmentDto = req.body;
+    const { date, time, status, userId }: IAppointmentDto = req.body;
+
+    if (userId == null) {
+      throw Error("ingrese el user id");
+    }
 
     const BDturno: Appointment = await crearTurnoService({
       date,
       time,
       status,
-      user,
+      userId,
     });
 
     res.status(201).json({ message: "Turno creado", turno: BDturno });
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: "Datos incorrectos" });
   }
 };
 

@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Credential } from "./Credencial";
-import { Appointment } from "./Turno";
+import { Appointment } from "./Appointment";
 
 @Entity({ name: "usuarios" })
 export class User {
@@ -20,7 +20,7 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column("date")
   birthdate: Date;
 
   @Column("integer")
@@ -30,6 +30,6 @@ export class User {
   @JoinColumn()
   credential: Credential;
 
-  @OneToMany(() => Appointment, (turno) => turno.user)
+  @OneToMany(() => Appointment, (turno) => turno.userId)
   turno: Appointment[];
 }

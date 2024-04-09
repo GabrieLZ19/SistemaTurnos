@@ -1,8 +1,4 @@
-import {
-  AppDataSource,
-  credentialModel,
-  userModel,
-} from "../config/data-source";
+import { credentialModel } from "../config/data-source";
 import { ICredentialDto } from "../dtos/ICredentialDto";
 import { Credential } from "../entities/Credencial";
 
