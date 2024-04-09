@@ -20,9 +20,3 @@ export const AppDataSource = new DataSource({
   subscribers: [],
   migrations: [],
 });
-
-export const userModel = AppDataSource.getRepository(User);
-
-export const credentialModel = AppDataSource.getRepository(Credential);
-
-export const turnModel = AppDataSource.getRepository(Appointment);

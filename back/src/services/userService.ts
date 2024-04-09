@@ -1,4 +1,4 @@
-import { userModel } from "../config/data-source";
+import UserRepository from "../repositories/UserRepository";
 import { ICredentialDto } from "../dtos/ICredentialDto";
 import { IUserDto } from "../dtos/IUserDto";
 import { Credential } from "../entities/Credencial";
@@ -6,7 +6,7 @@ import { User } from "../entities/User";
 import { buscarCredencial, crearCredencial } from "./credentialService";
 
 export const obtenerUsuariosService = async (): Promise<User[]> => {
-  const usuarios: User[] = await userModel.find({
+  const usuarios: User[] = await UserRepository.find({
     relations: { turno: true },
   });
 
@@ -18,7 +18,7 @@ export const obtenerUsuariosService = async (): Promise<User[]> => {
 };
 
 export const obtenerUsuarioIDService = async (id: number): Promise<User> => {
-  const usuario: User | null = await userModel.findOne({
+  const usuario: User | null = await UserRepository.findOne({
     relations: { turno: true },
     where: { id: id },
   });
@@ -42,8 +42,8 @@ export const crearUsuarioService = async (params: IUserDto): Promise<User> => {
     (newUser.nDni = params.nDni),
     (newUser.credential = newCredencial);
 
-  const bdUser = await userModel.create(newUser);
-  await userModel.save(bdUser);
+  const bdUser = await UserRepository.create(newUser);
+  await UserRepository.save(bdUser);
 
   return bdUser;
 };
@@ -57,7 +57,7 @@ export const loginUsuarioService = async (
     throw Error("Credenciales invalidas");
   }
 
-  const usuario: User | null = await userModel.findOneBy({ id: validar });
+  const usuario: User | null = await UserRepository.findOneBy({ id: validar });
 
   if (!usuario) throw Error("No se encontro ningun usuario");
 
