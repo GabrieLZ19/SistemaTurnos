@@ -5,6 +5,7 @@ import { Appointment } from "../entities/Appointment";
 
 export const obtenerTurnosService = async (): Promise<Appointment[]> => {
   const turns: Appointment[] = await AppointmentRepository.find({
+    // select: { id:true},
     relations: { userId: true },
   });
 
@@ -39,7 +40,6 @@ export const crearTurnoService = async (
   const newTurn: Appointment = new Appointment();
 
   (newTurn.date = turno.date),
-    (newTurn.status = turno.status),
     (newTurn.time = turno.time),
     (newTurn.userId = usuario);
 

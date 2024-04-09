@@ -12,7 +12,7 @@ export class Appointment {
   @Column("integer")
   time: number;
 
-  @Column()
+  @Column({ default: "active" })
   status: "active" | "cancelled";
 
   @ManyToOne(() => User, (user) => user.turno)

@@ -31,7 +31,7 @@ export const obtenerTurnoEspecifico = async (req: Request, res: Response) => {
 
 export const agendarTurno = async (req: Request, res: Response) => {
   try {
-    const { date, time, status, userId }: IAppointmentDto = req.body;
+    const { date, time, userId }: IAppointmentDto = req.body;
 
     if (userId == null) {
       throw Error("ingrese el user id");
@@ -40,7 +40,6 @@ export const agendarTurno = async (req: Request, res: Response) => {
     const BDturno: Appointment = await crearTurnoService({
       date,
       time,
-      status,
       userId,
     });
 
