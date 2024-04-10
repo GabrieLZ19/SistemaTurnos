@@ -1,10 +1,12 @@
 import NavBar from "./NavBar";
-
+import styles from "../styles/Home.module.css";
 const Home = () => {
   return (
     <>
       <NavBar />
-      <h1>Home </h1>
+      <div className={styles.containerMain}>
+        <h1> holaa</h1>
+      </div>
     </>
   );
 };
