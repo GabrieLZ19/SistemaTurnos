@@ -1,0 +1,21 @@
+.title {
+  text-align: center;
+}
+
+.containerTurnos {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerList {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.containerList li {
+  background-color: rgb(230, 138, 19);
+  padding: 15px;
+  padding-inline: 20px;
+  border-radius: 20px;
+}

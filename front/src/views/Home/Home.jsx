@@ -1,4 +1,4 @@
-import styles from "../../styles/Home.module.css";
+import styles from "../Home/Home.module.css";
 const Home = () => {
   return (
     <div className={styles.containerMain}>

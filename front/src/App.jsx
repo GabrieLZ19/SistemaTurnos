@@ -1,11 +1,13 @@
-import Home from "./views/Home/Home";
-import NavBar from "./components/NavBar/NavBar";
-import "./styles/App.module.css";
+import NavBar from "./components/NavBar/NavBar.jsx";
+import "./App.module.css";
+import MisTurnos from "./views/MisTurnos/MisTurnos";
+
 function App() {
   return (
     <>
       <NavBar />
-      <Home />
+
+      <MisTurnos />
     </>
   );
 }
