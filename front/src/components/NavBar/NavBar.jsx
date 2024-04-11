@@ -3,6 +3,9 @@ import styles from "../NavBar/NavBar.module.css";
 const NavBar = () => {
   return (
     <div className={styles.navContainer}>
+      <div className={styles.imgContainer}>
+        <img src="../src/assets/Logo.png" alt="logo" /> <p> MedicT</p>
+      </div>
       <nav className={styles.nav}>
         <ul className={styles.containerList}>
           <li className={styles.list}>
