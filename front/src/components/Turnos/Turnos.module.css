@@ -1,34 +1,52 @@
 .containerTurnos {
   display: flex;
+  align-items: center;
   justify-content: space-around;
-
   border-radius: 20px;
   margin-bottom: 10px;
   background-color: #e76f51;
 }
 
-.containerTurnos h3:nth-child(1) {
+.containerTurnos h4:nth-child(1) {
+  text-align: center;
+  width: 110px;
   background-color: #f4a261;
   border-radius: 15px;
   padding: 10px;
-  margin-left: 50px;
 }
-.containerTurnos h3:nth-child(2) {
+.containerTurnos h4:nth-child(2) {
+  text-align: center;
+  width: 20px;
+  background-color: #f4a261;
+  border-radius: 20%;
+  padding: 10px;
+}
+
+.containerTurnos h4:nth-child(3) {
+  text-align: center;
+  width: 150px;
   background-color: #f4a261;
   border-radius: 20px;
   padding: 10px;
 }
 
-.containerTurnos h3:nth-child(3) {
+.containerTurnos h4:nth-child(4) {
   background-color: #f4a261;
   border-radius: 20px;
   padding: 10px;
-  margin-right: 25px;
 }
 
-.containerTurnos h3:nth-child(4) {
+.containerTurnos button {
   background-color: #f4a261;
   border-radius: 20px;
-  padding: 10px;
-  margin-right: 10px;
+  height: 50px;
+  font-family: "MuseoModerno", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  cursor: pointer;
+}
+
+.containerTurnos button:hover {
+  background-color: rgba(158, 15, 15, 0.664);
+  transition: 0.5s;
 }

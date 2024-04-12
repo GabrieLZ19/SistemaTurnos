@@ -1,12 +1,13 @@
 import styles from "./Turnos.module.css";
 
-const Turnos = ({ turnos: { id, time, date, status } }) => {
+const Turnos = ({ turnos: { time, date, description, status } }) => {
   return (
     <div className={styles.containerTurnos}>
-      <h3>{id} </h3>
-      <h3>{date} </h3>
-      <h3>{time} </h3>
-      <h3>{status} </h3>
+      <h4>{date} </h4>
+      <h4>{time} </h4>
+      <h4> {description}</h4>
+      <h4>{status} </h4>
+      <button>Cancelar</button>
     </div>
   );
 };

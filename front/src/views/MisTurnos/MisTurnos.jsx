@@ -1,19 +1,26 @@
 import Turnos from "../../components/Turnos/Turnos";
-import turnos from "../../helpers/myTurns";
+import axios from "axios";
 import styles from "./MisTurnos.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MisTurnos = () => {
-  const [turns, setMyTurns] = useState(turnos);
+  const [turns, setMyTurns] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/appointments")
+      .then((res) => setMyTurns(res.data));
+  }, []);
 
   return (
     <>
       <h1 className={styles.title}> Mis Turnos</h1>
       <ul className={styles.containerList}>
-        <li>ID</li>
         <li>Date</li>
         <li>Time</li>
+        <li>Description</li>
         <li>Status</li>
+        <li>Actions</li>
       </ul>
       <div className={styles.containerTurnos}>
         {turns.map((turnos) => (
