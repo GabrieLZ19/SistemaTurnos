@@ -12,6 +12,9 @@ export class Appointment {
   @Column("integer")
   time: number;
 
+  @Column()
+  description: string;
+
   @Column({ default: "active" })
   status: "active" | "cancelled";
 

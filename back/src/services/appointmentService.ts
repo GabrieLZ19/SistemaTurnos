@@ -41,6 +41,7 @@ export const crearTurnoService = async (
 
   (newTurn.date = turno.date),
     (newTurn.time = turno.time),
+    (newTurn.description = turno.description),
     (newTurn.userId = usuario);
 
   const dbTurno = await AppointmentRepository.create(newTurn);
