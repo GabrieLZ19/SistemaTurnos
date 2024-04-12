@@ -22,11 +22,19 @@ const MisTurnos = () => {
         <li>Status</li>
         <li>Actions</li>
       </ul>
-      <div className={styles.containerTurnos}>
-        {turns.map((turnos) => (
-          <Turnos key={turnos.id} turnos={turnos} />
-        ))}
-      </div>
+
+      {!turns.length ? (
+        <div>
+          {" "}
+          <h2>No hay turnos </h2>
+        </div>
+      ) : (
+        <div className={styles.containerTurnos}>
+          {turns?.map((turnos) => (
+            <Turnos key={turnos.id} turnos={turnos} />
+          ))}
+        </div>
+      )}
     </>
   );
 };
