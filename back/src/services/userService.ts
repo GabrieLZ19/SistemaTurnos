@@ -7,7 +7,7 @@ import { buscarCredencial, crearCredencial } from "./credentialService";
 
 export const obtenerUsuariosService = async (): Promise<User[]> => {
   const usuarios: User[] = await UserRepository.find({
-    relations: { turno: true },
+    relations: { turno: true, credential: true },
   });
 
   if (!usuarios) {
