@@ -27,6 +27,7 @@ h2 {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .containerCampos label {
@@ -47,6 +48,10 @@ h2 {
 .containerCampos input:focus {
   outline: 2px solid #6ee1cd;
   border-radius: 5px;
+}
+
+.containerCampos p {
+  color: red;
 }
 
 .containerCampos span {

@@ -7,9 +7,19 @@ const MisTurnos = () => {
   const [turns, setMyTurns] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/appointments")
-      .then((res) => setMyTurns(res.data));
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/appointments");
+        setMyTurns(response.data);
+      } catch (error) {
+        console.error(
+          "Error al obtener los turnos de la base de datos:",
+          error
+        );
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (

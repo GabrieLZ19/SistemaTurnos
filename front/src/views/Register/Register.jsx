@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { validar } from "../../helpers/validar";
 import { validarFormulario } from "../../helpers/validarForm";
 import styles from "./register.module.css";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -21,7 +22,19 @@ const Register = () => {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/users").then((res) => setUser(res.data));
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/users");
+        setUser(response.data);
+      } catch (error) {
+        console.error(
+          "Error al obtener los usuarios de la base de datos:",
+          error
+        );
+      }
+    };
+
+    fetchData();
   }, []);
 
   console.log(form);
@@ -41,15 +54,24 @@ const Register = () => {
     });
   };
 
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit = async (event) => {
     event.preventDefault();
     setCheckForm(validarFormulario(form));
 
     const errores = validarFormulario(form);
     if (Object.keys(errores).length === 0) {
-      axios.post("http://localhost:3000/users/register", form);
-      alert("Formulario válido");
+      await axios.post("http://localhost:3000/users/register", form);
+      Swal.fire({
+        title: "Registro Exitoso",
+        text: "Tus datos fueron almacenados",
+        icon: "success",
+      });
     } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo salio mal!",
+      });
       setCheckForm(errores);
     }
   };
@@ -79,7 +101,7 @@ const Register = () => {
           />
         </div>
 
-        {errors.email && <span>{errors.email}</span>}
+        {errors.email && <p>{errors.email}</p>}
         {checkForm.email && <span>{checkForm.email}</span>}
 
         <div>
@@ -101,7 +123,7 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
-        {errors.nDni && <span>{errors.nDni}</span>}
+        {errors.nDni && <p>{errors.nDni}</p>}
         {checkForm.nDni && <span>{checkForm.nDni}</span>}
         <div>
           <label>Username</label>
@@ -112,7 +134,7 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
-        {errors.username && <span>{errors.username}</span>}
+        {errors.username && <p>{errors.username}</p>}
         {checkForm.username && <span>{checkForm.username}</span>}
         <div>
           <label>Password</label>

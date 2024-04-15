@@ -2,18 +2,24 @@ import { useEffect, useState } from "react";
 import { validarLogin } from "../../helpers/validarLogin";
 import axios from "axios";
 import styles from "./Login.module.css";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
 
   const [usuariosBD, setUsuariosBD] = useState([]);
-
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/users")
-      .then((res) => setUsuariosBD(res.data));
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/users");
+        setUsuariosBD(response.data);
+      } catch (error) {
+        console.error("Error al obtener datos de la base de datos:", error);
+      }
+    };
 
+    fetchData();
+  }, []);
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -23,16 +29,24 @@ const Login = () => {
     });
   };
 
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit = async (event) => {
     event.preventDefault();
 
     const validar = validarLogin(usuariosBD, user);
 
     if (validar === true) {
-      axios.post("http://localhost:3000/users/login", user);
-      alert("Login exitoso");
+      await axios.post("http://localhost:3000/users/login", user);
+      Swal.fire({
+        title: "Login exitoso",
+        text: "En breve ingresara en la pagina",
+        icon: "success",
+      });
     } else {
-      alert("Datos incorrectos");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Algo salio mal!",
+      });
     }
   };
 
