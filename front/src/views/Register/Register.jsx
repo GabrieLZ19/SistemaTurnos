@@ -56,7 +56,6 @@ const Register = () => {
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-    setCheckForm(validarFormulario(form));
 
     const errores = validarFormulario(form);
     if (Object.keys(errores).length === 0) {
