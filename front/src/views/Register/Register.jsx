@@ -60,16 +60,26 @@ const Register = () => {
     const errores = validarFormulario(form);
     if (Object.keys(errores).length === 0) {
       await axios.post("http://localhost:3000/users/register", form);
+
       Swal.fire({
         title: "Registro Exitoso",
         text: "Tus datos fueron almacenados",
         icon: "success",
       });
+
+      setForm({
+        name: "",
+        email: "",
+        birthdate: "",
+        nDni: "",
+        username: "",
+        password: "",
+      });
     } else {
       Swal.fire({
-        icon: "error",
         title: "Oops...",
         text: "Algo salio mal!",
+        icon: "error",
       });
       setCheckForm(errores);
     }
@@ -96,6 +106,7 @@ const Register = () => {
             type="email"
             value={form.email}
             name="email"
+            placeholder="nombre@email.com"
             onChange={handleInputChange}
           />
         </div>
@@ -144,6 +155,7 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
+        {errors.password && <span>{errors.password}</span>}
         {checkForm.password && <span>{checkForm.password}</span>}
       </div>
 
