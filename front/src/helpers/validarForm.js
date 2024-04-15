@@ -2,7 +2,7 @@ export const validarFormulario = (form) => {
   const nuevosErrores = {};
 
   if (!form.name) {
-    nuevosErrores.name = "El campo name es requerido.";
+    nuevosErrores.name = "El campo nombre es requerido.";
   }
 
   if (!form.email) {
@@ -10,7 +10,7 @@ export const validarFormulario = (form) => {
   }
 
   if (!form.birthdate) {
-    nuevosErrores.birthdate = "El campo birthdate es requerido.";
+    nuevosErrores.birthdate = "El campo Fecha de nacimiento es requerido.";
   }
 
   if (!form.nDni) {
@@ -18,11 +18,11 @@ export const validarFormulario = (form) => {
   }
 
   if (!form.username) {
-    nuevosErrores.username = "El campo username es requerido.";
+    nuevosErrores.username = "El campo usuario es requerido.";
   }
 
   if (!form.password) {
-    nuevosErrores.password = "El campo password es requerido.";
+    nuevosErrores.password = "El campo contraseña es requerido.";
   }
 
   return nuevosErrores;

@@ -50,15 +50,8 @@ h2 {
   border-radius: 5px;
 }
 
-.containerCampos p {
-  color: red;
-}
-
 .containerCampos span {
-  color: red;
-  position: relative;
-  left: 110px;
-  bottom: 52px;
+  color: rgb(228, 84, 40);
 }
 
 .buttonRegister {

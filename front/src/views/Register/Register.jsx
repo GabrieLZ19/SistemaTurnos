@@ -82,7 +82,7 @@ const Register = () => {
 
       <div className={styles.containerCampos}>
         <div className={styles.containerName}>
-          <label>Name</label>
+          <label>Nombre</label>
           <input
             type="text"
             value={form.name}
@@ -101,11 +101,11 @@ const Register = () => {
           />
         </div>
 
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <span>{errors.email}</span>}
         {checkForm.email && <span>{checkForm.email}</span>}
 
         <div>
-          <label>Birthdate</label>
+          <label>Fecha de Nacimiento</label>
           <input
             type="date"
             value={form.birthdate}
@@ -123,10 +123,10 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
-        {errors.nDni && <p>{errors.nDni}</p>}
+        {errors.nDni && <span>{errors.nDni}</span>}
         {checkForm.nDni && <span>{checkForm.nDni}</span>}
         <div>
-          <label>Username</label>
+          <label>Usuario</label>
           <input
             type="text"
             value={form.username}
@@ -134,10 +134,10 @@ const Register = () => {
             onChange={handleInputChange}
           />
         </div>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <span>{errors.username}</span>}
         {checkForm.username && <span>{checkForm.username}</span>}
         <div>
-          <label>Password</label>
+          <label>Contraseña</label>
           <input
             type="password"
             value={form.password}
