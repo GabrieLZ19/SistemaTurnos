@@ -4,6 +4,7 @@ import { validar } from "../../helpers/validar";
 import { validarFormulario } from "../../helpers/validarForm";
 import styles from "./register.module.css";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -20,6 +21,8 @@ const Register = () => {
   const [errors, setErrors] = useState({ username: "", email: "", nDni: "" });
 
   const [user, setUser] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,14 +70,7 @@ const Register = () => {
         icon: "success",
       });
 
-      setForm({
-        name: "",
-        email: "",
-        birthdate: "",
-        nDni: "",
-        username: "",
-        password: "",
-      });
+      navigate("/");
     } else {
       Swal.fire({
         title: "Oops...",
@@ -83,6 +79,10 @@ const Register = () => {
       });
       setCheckForm(errores);
     }
+  };
+
+  const handleOnClick = () => {
+    navigate("/");
   };
 
   return (
@@ -158,11 +158,14 @@ const Register = () => {
         {errors.password && <span>{errors.password}</span>}
         {checkForm.password && <span>{checkForm.password}</span>}
       </div>
-
-      <button type="submit" className={styles.buttonRegister}>
-        {" "}
-        Registrarse
-      </button>
+      <div className={styles.containerButtons}>
+        <button onClick={handleOnClick} className={styles.buttons}>
+          Volver
+        </button>
+        <button type="submit" className={styles.buttons}>
+          Registrarse
+        </button>
+      </div>
     </form>
   );
 };

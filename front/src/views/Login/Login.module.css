@@ -1,16 +1,12 @@
-body {
-  background-image: url("../../assets/pxfuel.jpg");
-}
-
 .containerLogin {
   background-color: #364960;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin: 0 auto;
+  margin: 10% auto;
   width: 300px;
-  height: 300px;
+  height: 350px;
   border-radius: 20px;
 }
 
@@ -42,9 +38,20 @@ h2 {
 
 .containerLogin button {
   font-family: "MuseoModerno", sans-serif;
-  color: white;
+  color: black;
+  font-weight: bold;
   font-size: 15px;
   background-color: #6ee1cd;
   border-radius: 20px;
   padding: 12px;
+}
+
+.containerRegister {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.containerRegister span {
+  color: rgb(22, 170, 180);
 }

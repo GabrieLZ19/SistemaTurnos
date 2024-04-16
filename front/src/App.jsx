@@ -1,20 +1,27 @@
 import NavBar from "./components/NavBar/NavBar.jsx";
 import "./App.module.css";
-// import Home from "./views/Home/Home.jsx";
+import HomePage from "./views/Home/Home.jsx";
+import TurnosPage from "./views/MisTurnos/MisTurnos.jsx";
+import LoginPage from "./views/Login/Login.jsx";
+import RegisterPage from "./views/Register/Register.jsx";
+import { useLocation } from "react-router-dom";
 
-// import Login from "./views/Login/Login.jsx";
-// import MisTurnos from "./views/MisTurnos/MisTurnos";
-import Register from "./views/Register/Register.jsx";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
   return (
     <>
-      <NavBar />
-      {/* <Home />*/}
+      {location.pathname !== "/" && location.pathname !== "/register" && (
+        <NavBar />
+      )}
 
-      {/*<Login />*/}
-      {/*<MisTurnos />*/}
-      {<Register />}
+      <Routes>
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/appointments/:id" element={<TurnosPage />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
     </>
   );
 }

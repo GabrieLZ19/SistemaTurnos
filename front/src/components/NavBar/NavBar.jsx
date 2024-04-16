@@ -1,4 +1,6 @@
+import DropdownMenu from "../Dropdown/Dropdown";
 import styles from "../NavBar/NavBar.module.css";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -9,13 +11,13 @@ const NavBar = () => {
       <nav className={styles.nav}>
         <ul className={styles.containerList}>
           <li className={styles.list}>
-            <a href="#"> Inicio</a>
+            <Link to="/home">Inicio</Link>
           </li>
           <li className={styles.list}>
-            <a href="#"> Tramite</a>
+            <Link to="/appointments/:id">Turnos</Link>
           </li>
           <li className={styles.list}>
-            <a href="#"> Usuario</a>
+            <DropdownMenu />
           </li>
         </ul>
       </nav>

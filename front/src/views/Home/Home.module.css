@@ -1,3 +1,7 @@
+body {
+  background-image: url("../../assets/pxfuel.jpg");
+}
+
 .containerMain {
   display: flex;
   flex-direction: column;

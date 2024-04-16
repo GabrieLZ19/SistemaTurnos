@@ -3,11 +3,16 @@ import { validarLogin } from "../../helpers/validarLogin";
 import axios from "axios";
 import styles from "./Login.module.css";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
 
   const [usuariosBD, setUsuariosBD] = useState([]);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,6 +46,8 @@ const Login = () => {
         text: "En breve ingresara en la pagina",
         icon: "success",
       });
+
+      navigate("/home");
     } else {
       Swal.fire({
         icon: "error",
@@ -54,11 +61,11 @@ const Login = () => {
     <form onSubmit={handleOnSubmit} className={styles.containerLogin}>
       <h2>Login</h2>
       <div>
-        <label>Username</label>
+        <label>Usuario</label>
         <input type="text" name="username" onChange={handleInputChange}></input>
       </div>
       <div>
-        <label>Password</label>
+        <label>Contraseña</label>
         <input
           type="password"
           name="password"
@@ -66,7 +73,13 @@ const Login = () => {
         ></input>
       </div>
 
-      <button type="submit">Login</button>
+      <button type="submit">Ingresar</button>
+      <div className={styles.containerRegister}>
+        <label>¿Eres nuevo?</label>
+        <Link to="/register">
+          <span>Registrate</span>
+        </Link>
+      </div>
     </form>
   );
 };

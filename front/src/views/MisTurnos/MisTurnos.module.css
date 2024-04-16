@@ -1,5 +1,6 @@
 .title {
   text-align: center;
+  color: white;
 }
 
 .containerTurnos {
@@ -22,18 +23,3 @@
   padding-inline: 20px;
   border-radius: 20px;
 }
-/* 
-.containerList li:nth-child(1) {
-  margin-left: -10px;
-}
-
-.containerList li:nth-child(2) {
-  margin-left: 30px;
-}
-
-.containerList li:nth-child(3) {
-  margin-right: 30px;
-}
-
-.containerList li:nth-child(4) {
-} */

@@ -2,14 +2,18 @@ import Turnos from "../../components/Turnos/Turnos";
 import axios from "axios";
 import styles from "./MisTurnos.module.css";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const MisTurnos = () => {
   const [turns, setMyTurns] = useState([]);
-
+  const { id } = useParams();
+  console.log(id);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/appointments");
+        const response = await axios.get(
+          `http://localhost:3000/appointments/${id}`
+        );
         setMyTurns(response.data);
       } catch (error) {
         console.error(
@@ -20,7 +24,7 @@ const MisTurnos = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -35,7 +39,6 @@ const MisTurnos = () => {
 
       {!turns.length ? (
         <div>
-          {" "}
           <h2>No hay turnos </h2>
         </div>
       ) : (
