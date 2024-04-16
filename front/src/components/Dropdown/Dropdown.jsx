@@ -16,7 +16,7 @@ const DropdownMenu = () => {
   return (
     <div style={{ position: "relative", width: "150px" }}>
       <img
-        src="../src/assets/usuario-de-perfil.png"
+        src="../src/assets/usuario.png"
         alt="Perfil"
         onClick={toggleDropdown}
         style={{
@@ -25,7 +25,7 @@ const DropdownMenu = () => {
       />
 
       {isOpen && (
-        <div style={{ position: "absolute", top: "100%", left: 0 }}>
+        <div>
           <Dropdown.Menu show={isOpen} onClose={closeDropdown}>
             <Dropdown.Item>
               <Link to="/">Cerrar Sesión</Link>

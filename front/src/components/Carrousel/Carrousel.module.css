@@ -1,0 +1,55 @@
+* {
+  overflow-x: hidden;
+}
+
+.containerCarrousel {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.containerCarrousel div {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;
+  text-align: center;
+  width: 100%;
+
+  animation: loop 8s ease-in-out infinite;
+  position: relative;
+}
+@keyframes loop {
+  0% {
+    transform: translateX(0);
+  }
+
+  80% {
+    transform: translateX(-30%);
+  }
+}
+
+.containerCarrousel div img {
+  width: max-content;
+  height: 600px;
+  filter: grayscale(0.5);
+}
+
+.containerCarrousel div h3 {
+  color: rgb(46, 177, 159);
+  border: 1px;
+  background-color: rgb(32, 34, 34);
+  border-radius: 20px;
+  padding: 5px;
+  position: absolute;
+  top: 75%;
+  left: 30px;
+  font-size: 30px;
+}
+
+.containerCarrousel div p {
+  font-weight: bold;
+  position: absolute;
+  bottom: 2%;
+  left: 30px;
+}
