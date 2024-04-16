@@ -76,7 +76,7 @@ const Login = () => {
       <button type="submit">Ingresar</button>
       <div className={styles.containerRegister}>
         <label>¿Eres nuevo?</label>
-        <Link to="/register">
+        <Link to="/register" style={{ textDecoration: "none" }}>
           <span>Registrate</span>
         </Link>
       </div>
