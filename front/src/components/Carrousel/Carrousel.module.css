@@ -1,36 +1,35 @@
-* {
-  overflow-x: hidden;
-}
-
 .containerCarrousel {
   display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
   gap: 20px;
-  overflow: hidden;
+
   width: 100%;
 }
 
 .containerCarrousel div {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
+  justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%;
-
+  overflow-x: hidden;
   animation: loop 8s ease-in-out infinite;
   position: relative;
 }
+
 @keyframes loop {
   0% {
     transform: translateX(0);
   }
 
   80% {
-    transform: translateX(-30%);
+    transform: translateX(-20%);
   }
 }
 
 .containerCarrousel div img {
-  width: max-content;
+  width: 600px;
   height: 600px;
   filter: grayscale(0.5);
 }
