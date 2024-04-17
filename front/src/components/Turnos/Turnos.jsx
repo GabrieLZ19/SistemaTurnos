@@ -29,10 +29,8 @@ const Turnos = ({ turnos: { id, time, date, description, status } }) => {
         });
 
         try {
-          // Realiza la solicitud para cancelar el turno
           await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
 
-          // Actualiza el estado del turno en la UI
           setAppointmentStatus("cancelled");
 
           Swal.fire({
@@ -41,10 +39,8 @@ const Turnos = ({ turnos: { id, time, date, description, status } }) => {
             icon: "success",
           });
 
-          // Navega a la página de turnos después de la cancelación
           navigate("/appointments");
         } catch (error) {
-          // Si hay un error, muestra un mensaje de error y restaura el estado del turno
           setAppointmentStatus(status);
           Swal.fire({
             title: "Error!",
