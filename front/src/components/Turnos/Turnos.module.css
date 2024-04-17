@@ -39,3 +39,8 @@
   background-color: rgba(158, 15, 15, 0.664);
   transition: 0.5s;
 }
+
+.containerTurnos button:disabled:hover {
+  background-color: transparent;
+  cursor: not-allowed;
+}

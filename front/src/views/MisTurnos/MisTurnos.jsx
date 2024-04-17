@@ -1,39 +1,30 @@
 import Turnos from "../../components/Turnos/Turnos";
 import axios from "axios";
 import styles from "./MisTurnos.module.css";
-import { useState, useEffect } from "react";
-
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setAppointments } from "../../redux/reducer";
 
 const MisTurnos = () => {
-  const [turns, setMyTurns] = useState([]);
-  const [usuariosBD, setUsuariosBD] = useState([]);
-  const userlogin = useSelector((state) => state.user);
+  const turns = useSelector((state) => state.appointments);
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/users");
-        setUsuariosBD(response.data);
+        const response = await axios.get(
+          `http://localhost:3000/users/${user.id}`
+        );
+
+        dispatch(setAppointments(response.data.turno));
       } catch (error) {
         console.error("Error al obtener datos de la base de datos:", error);
       }
     };
-
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const user = usuariosBD.find(
-      (user) =>
-        user.credential.username === userlogin[0].username &&
-        user.credential.password === userlogin[0].password
-    );
-
-    if (user) {
-      setMyTurns(user.turno);
-    }
-  }, [usuariosBD, userlogin]);
 
   return (
     <>

@@ -6,6 +6,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: {},
+  appointments: [],
 };
 
 export const sesionSlices = createSlice({
@@ -17,10 +18,28 @@ export const sesionSlices = createSlice({
     },
 
     sesionCerrada: (state) => {
-      state.Login = false;
-      state.user = [];
+      state.user = {};
+    },
+
+    setAppointments: (state, action) => {
+      state.appointments = action.payload;
+    },
+
+    cancelAppointments: (state, action) => {
+      state.appointments = state.appointments.map((turno) => {
+        if (turno.id === action.payload) {
+          return { ...turno, status: "cancelled" };
+        }
+
+        return turno;
+      });
     },
   },
 });
 
-export const { sesionIniciada, sesionCerrada } = sesionSlices.actions;
+export const {
+  sesionIniciada,
+  sesionCerrada,
+  setAppointments,
+  cancelAppointments,
+} = sesionSlices.actions;

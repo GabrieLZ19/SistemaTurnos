@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-  const userlogin = useSelector((state) => state.Login);
+  const userlogin = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const handleOnClick = () => {
@@ -24,7 +24,7 @@ const NavBar = () => {
           </li>
           <button
             className={styles.buttonNav}
-            disabled={userlogin === false}
+            disabled={!userlogin.name}
             onClick={handleOnClick}
           >
             Turnos

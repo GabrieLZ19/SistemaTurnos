@@ -10,7 +10,6 @@ const DropdownMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const userlogin = useSelector((state) => state.Login);
   const usuario = useSelector((state) => state.user);
 
   const toggleDropdown = () => {
@@ -22,7 +21,7 @@ const DropdownMenu = () => {
   };
 
   const handleOnClick = () => {
-    dispatch(sesionCerrada(userlogin));
+    dispatch(sesionCerrada(usuario));
 
     navigate("/");
   };
@@ -60,15 +59,15 @@ const DropdownMenu = () => {
                   fontWeight: "bold",
                 }}
               >
-                {usuario.length > 0
-                  ? `Bienvenido/a, ${usuario[0].username}`
+                {usuario.name
+                  ? `Bienvenido/a, ${usuario.name}`
                   : "Bienvenido/a"}
               </p>
             </DropdownHeader>
             <Dropdown.Item>
               <button
                 onClick={handleOnClick2}
-                disabled={userlogin === true}
+                disabled={usuario.name}
                 className={styles.buttonDrop}
               >
                 Iniciar Sesión
@@ -77,7 +76,7 @@ const DropdownMenu = () => {
             <Dropdown.Item>
               <button
                 onClick={handleOnClick}
-                disabled={userlogin === false}
+                disabled={!usuario.name}
                 className={styles.buttonDrop}
               >
                 Cerrar Sesión
