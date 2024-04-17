@@ -9,7 +9,7 @@ export class Appointment {
   @Column("date")
   date: Date;
 
-  @Column("integer")
+  @Column("time")
   time: number;
 
   @Column()
