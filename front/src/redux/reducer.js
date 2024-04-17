@@ -5,18 +5,15 @@ import { createSlice } from "@reduxjs/toolkit";
 // };
 
 const initialState = {
-  Login: false,
-  user: [],
+  user: {},
 };
 
 export const sesionSlices = createSlice({
   name: "SesionUsuario",
-  initialState,
+  initialState: initialState,
   reducers: {
     sesionIniciada: (state, action) => {
-      state.Login = true;
-
-      state.user = state.user.concat(action.payload);
+      state.user = action.payload;
     },
 
     sesionCerrada: (state) => {

@@ -44,15 +44,17 @@ const Login = () => {
     const validar = validarLogin(usuariosBD, user);
 
     if (validar === true) {
-      await axios.post("http://localhost:3000/users/login", user);
+      const response = await axios.post(
+        "http://localhost:3000/users/login",
+        user
+      );
       Swal.fire({
         title: "Login exitoso",
         text: "En breve ingresara en la pagina",
         icon: "success",
       });
-
+      dispatch(sesionIniciada(response.data.user));
       navigate("/");
-      dispatch(sesionIniciada(user));
     } else {
       Swal.fire({
         icon: "error",

@@ -19,7 +19,7 @@ export const validar = (user, name, value) => {
 
     if (name === "password" && !passRegex.test(value)) {
       mensaje =
-        "La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. ";
+        "La contraseña debe tener al menos entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. ";
     }
 
     if (name === "email" && !emailRegex.test(value)) {

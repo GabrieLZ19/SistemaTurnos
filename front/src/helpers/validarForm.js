@@ -1,5 +1,6 @@
 export const validarFormulario = (form) => {
   const nuevosErrores = {};
+  const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
   if (!form.name) {
     nuevosErrores.name = "El campo nombre es requerido.";
@@ -21,6 +22,9 @@ export const validarFormulario = (form) => {
     nuevosErrores.username = "El campo usuario es requerido.";
   }
 
+  if (!passRegex.test(form.password)) {
+    nuevosErrores.password = "Contraseña invalida ";
+  }
   if (!form.password) {
     nuevosErrores.password = "El campo contraseña es requerido.";
   }
