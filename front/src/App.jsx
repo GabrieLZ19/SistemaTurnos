@@ -13,14 +13,14 @@ function App() {
   const location = useLocation();
   return (
     <>
-      {location.pathname !== "/" && location.pathname !== "/register" && (
+      {location.pathname !== "/login" && location.pathname !== "/register" && (
         <NavBar />
       )}
 
       <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/appointments/:id" element={<TurnosPage />} />
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/appointments" element={<TurnosPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>

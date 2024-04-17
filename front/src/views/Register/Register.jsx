@@ -70,7 +70,7 @@ const Register = () => {
         icon: "success",
       });
 
-      navigate("/");
+      navigate("/login");
     } else {
       Swal.fire({
         title: "Oops...",
@@ -82,7 +82,7 @@ const Register = () => {
   };
 
   const handleOnClick = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   return (

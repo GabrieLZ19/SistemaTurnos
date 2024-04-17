@@ -5,6 +5,8 @@ import styles from "./Login.module.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { sesionIniciada } from "../../redux/reducer";
 
 const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -12,6 +14,8 @@ const Login = () => {
   const [usuariosBD, setUsuariosBD] = useState([]);
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +51,8 @@ const Login = () => {
         icon: "success",
       });
 
-      navigate("/home");
+      navigate("/");
+      dispatch(sesionIniciada(user));
     } else {
       Swal.fire({
         icon: "error",

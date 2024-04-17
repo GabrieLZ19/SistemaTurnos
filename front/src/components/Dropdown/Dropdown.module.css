@@ -1,0 +1,20 @@
+.buttonDrop {
+  background-color: rgb(224, 168, 14);
+  border-radius: 20px;
+  border: 2px solid rgb(82, 71, 43);
+  padding: 5px;
+  color: rgb(26, 24, 24);
+  font-weight: bold;
+  margin-bottom: 5px;
+
+  font-family: "MuseoModerno", sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.buttonDrop:disabled {
+  background-color: rgba(224, 168, 14, 0.5);
+  border: 2px solid rgba(82, 71, 43, 0.5);
+  color: rgba(26, 24, 24, 0.5);
+  cursor: not-allowed;
+}
