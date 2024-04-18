@@ -57,7 +57,10 @@ const Turnos = ({ turnos: { id, time, date, description, status } }) => {
       <h4>{time} </h4>
       <h4> {description}</h4>
       <h4>{status} </h4>
-      <button onClick={handleOnClick} disabled={status === "cancelled"}>
+      <button
+        onClick={handleOnClick}
+        disabled={status === "cancelled" || new Date(date) <= new Date()}
+      >
         Cancelar Turno
       </button>
     </div>

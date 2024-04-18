@@ -1,6 +1,6 @@
 export const isDateValid = (selectedDate) => {
   const today = new Date();
-  today.setDate(today.getDate() - 1);
+  today.getDay() + 1;
 
   if (
     selectedDate >= today &&
