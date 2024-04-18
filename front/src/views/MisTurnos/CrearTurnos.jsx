@@ -17,13 +17,18 @@ const CrearTurnos = () => {
 
     if (!isDateValid(selectedDate)) {
       showAlert(
-        "La fecha seleccionada debe ser un dia posterior al dia actual."
+        "La fecha seleccionada debe ser un dia posterior al dia actual y ser de lunes a viernes unicamente"
       );
       return false;
     }
 
     if (!isTimeValid(selectedTime)) {
       showAlert("La hora no esta dentro de la franga horaria disponible.");
+      return false;
+    }
+
+    if (!turno.description) {
+      showAlert("Debe ingresar el asunto");
       return false;
     }
 
@@ -109,7 +114,8 @@ const CrearTurnos = () => {
     <form onSubmit={handleOnSubmit} className={styles.containerForm}>
       <h2>Crear Turno </h2>
       <span style={{ color: "white" }}>
-        Horarios de atención: 09:00 a 13:00 y 16:00 a 21:00
+        Horarios de atención: 09:00 a 13:00 y 16:00 a 21:00 <br /> De Lunes a
+        Viernes
       </span>
       <div>
         <div className={styles.containerInputs}>

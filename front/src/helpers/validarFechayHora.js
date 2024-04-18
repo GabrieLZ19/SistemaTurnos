@@ -2,7 +2,13 @@ export const isDateValid = (selectedDate) => {
   const today = new Date();
   today.setDate(today.getDate() - 1);
 
-  return selectedDate >= today;
+  if (
+    selectedDate >= today &&
+    selectedDate.getDay() >= 0 &&
+    selectedDate.getDay() <= 4
+  ) {
+    return true;
+  }
 };
 
 export const isTimeValid = (selectedTime) => {
