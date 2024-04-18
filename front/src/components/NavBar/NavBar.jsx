@@ -1,17 +1,9 @@
 import DropdownMenu from "../Dropdown/Dropdown";
+import DropdownTurns from "../DropdownTurnos/DropdownTurnos";
 import styles from "../NavBar/NavBar.module.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-  const userlogin = useSelector((state) => state.user);
-  const navigate = useNavigate();
-
-  const handleOnClick = () => {
-    navigate("/appointments");
-  };
-
   return (
     <div className={styles.navContainer}>
       <div className={styles.imgContainer}>
@@ -22,13 +14,9 @@ const NavBar = () => {
           <li className={styles.list}>
             <Link to="/">Inicio</Link>
           </li>
-          <button
-            className={styles.buttonNav}
-            disabled={!userlogin.name}
-            onClick={handleOnClick}
-          >
-            Turnos
-          </button>
+          <div>
+            <DropdownTurns />
+          </div>
           <div>
             <DropdownMenu />
           </div>

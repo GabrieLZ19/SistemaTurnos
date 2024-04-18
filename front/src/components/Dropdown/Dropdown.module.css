@@ -1,20 +1,19 @@
 .buttonDrop {
-  background-color: rgb(224, 168, 14);
   border-radius: 20px;
-  border: 2px solid rgb(82, 71, 43);
-  padding: 5px;
-  color: rgb(26, 24, 24);
+  border: 2px solid #a8d0e6;
+  padding: 10px 20px;
+  color: #4c4c4c;
   font-weight: bold;
-  margin-bottom: 5px;
-
+  margin-bottom: 10px;
+  background-color: #a8fff1;
   font-family: "MuseoModerno", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
 }
 
 .buttonDrop:disabled {
-  background-color: rgba(224, 168, 14, 0.5);
-  border: 2px solid rgba(82, 71, 43, 0.5);
-  color: rgba(26, 24, 24, 0.5);
+  background-color: #f2f2f2;
+  border-color: #cccccc;
+  color: #999999;
   cursor: not-allowed;
 }

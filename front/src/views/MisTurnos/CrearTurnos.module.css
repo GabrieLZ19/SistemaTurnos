@@ -1,0 +1,53 @@
+.containerForm {
+  background-color: red;
+  text-align: center;
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
+  background-color: #364960;
+  border-radius: 20px;
+}
+
+.containerInputs {
+  margin-top: 30px;
+}
+
+.containerInputs label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.containerInputs input {
+  width: 110px;
+  text-align: center;
+  background-color: transparent;
+  border-bottom: 2px solid #7e91a7;
+  border-top: none;
+  border-inline: none;
+  color: white;
+}
+.containerInputs input:focus {
+  outline: 2px solid #6ee1cd;
+  border-radius: 5px;
+}
+
+.containerForm button {
+  font-family: "MuseoModerno", sans-serif;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: #6ee1cd;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 2vh;
+  margin-bottom: 20px;
+}
+
+.containerForm button:disabled {
+  background-color: #f2f2f2;
+  border-color: #cccccc;
+  color: #999999;
+  cursor: not-allowed;
+}

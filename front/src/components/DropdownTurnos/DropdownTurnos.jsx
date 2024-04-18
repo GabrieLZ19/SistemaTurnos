@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { Dropdown, DropdownHeader } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { sesionCerrada } from "../../redux/reducer";
+import { Dropdown } from "react-bootstrap";
+
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styles from "../Dropdown/Dropdown.module.css";
 
 const DropdownMenu = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const usuario = useSelector((state) => state.user);
@@ -21,13 +19,11 @@ const DropdownMenu = () => {
   };
 
   const handleOnClick = () => {
-    dispatch(sesionCerrada(usuario));
-
-    navigate("/");
+    navigate("/appointments");
   };
 
   const handleOnClick2 = () => {
-    navigate("/login");
+    navigate("/createTurn");
   };
 
   return (
@@ -39,38 +35,21 @@ const DropdownMenu = () => {
         justifyContent: "center",
       }}
     >
-      <img
-        src="../src/assets/usuario.png"
-        alt="Perfil"
-        onClick={toggleDropdown}
-        style={{
-          cursor: "pointer",
-        }}
-      />
+      <span onClick={toggleDropdown} style={{ cursor: "pointer" }}>
+        {" "}
+        Turnos
+      </span>
 
       {isOpen && (
         <div style={{ position: "absolute", top: "100%", left: "0" }}>
           <Dropdown.Menu show={isOpen} onClose={closeDropdown}>
-            <DropdownHeader>
-              <p
-                style={{
-                  fontSize: "15px",
-                  color: "#a8fff1",
-                  fontWeight: "bold",
-                }}
-              >
-                {usuario.name
-                  ? `Bienvenido/a, ${usuario.name}`
-                  : "Bienvenido/a"}
-              </p>
-            </DropdownHeader>
             <Dropdown.Item>
               <button
                 onClick={handleOnClick2}
-                disabled={usuario.name}
+                disabled={!usuario.name}
                 className={styles.buttonDrop}
               >
-                Iniciar Sesión
+                Crear Turno
               </button>
             </Dropdown.Item>
             <Dropdown.Item>
@@ -79,7 +58,7 @@ const DropdownMenu = () => {
                 disabled={!usuario.name}
                 className={styles.buttonDrop}
               >
-                Cerrar Sesión
+                Mis Turnos
               </button>
             </Dropdown.Item>
           </Dropdown.Menu>

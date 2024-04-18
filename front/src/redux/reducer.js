@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const initialStateAppoinments = {
-//   turnos: [],
-// };
-
 const initialState = {
   user: {},
   appointments: [],
