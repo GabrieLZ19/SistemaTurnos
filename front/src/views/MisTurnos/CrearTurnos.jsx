@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 const CrearTurnos = () => {
   const navigate = useNavigate();
   const usuario = useSelector((state) => state.user);
+  const formRef = useRef(null);
 
   const isFormValid = () => {
     const selectedDate = new Date(turno.date);
@@ -100,6 +101,7 @@ const CrearTurnos = () => {
         text: "Tu turno fue guardado correctamente",
         icon: "success",
       });
+      formRef.current.reset();
     } catch (error) {
       console.error("Error al crear el turno:", error);
       Swal.fire({
@@ -111,7 +113,11 @@ const CrearTurnos = () => {
   };
 
   return (
-    <form onSubmit={handleOnSubmit} className={styles.containerForm}>
+    <form
+      onSubmit={handleOnSubmit}
+      ref={formRef}
+      className={styles.containerForm}
+    >
       <h2>Crear Turno </h2>
       <span style={{ color: "white" }}>
         Horarios de atención: 09:00 a 13:00 y 16:00 a 21:00 <br /> De Lunes a
