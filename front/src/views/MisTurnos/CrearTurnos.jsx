@@ -11,43 +11,6 @@ const CrearTurnos = () => {
   const navigate = useNavigate();
   const usuario = useSelector((state) => state.user);
 
-  const [turno, setTurno] = useState({
-    date: "",
-    time: "",
-    description: "",
-    userId: usuario.id,
-  });
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    setTurno({
-      ...turno,
-      [name]: value,
-    });
-  };
-
-  const handleOnSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      await axios.post("http://localhost:3000/appointments/schedule", turno);
-
-      Swal.fire({
-        title: "¡Turno Creado!",
-        text: "Tu turno fue guardado correctamente",
-        icon: "success",
-      });
-    } catch (error) {
-      console.error("Error al crear el turno:", error);
-      Swal.fire({
-        title: "Error!",
-        text: "Hubo un error al crear el turno",
-        icon: "error",
-      });
-    }
-  };
-
   const isFormValid = () => {
     const selectedDate = new Date(turno.date);
     const selectedTime = new Date(`2000-01-01T${turno.time}`);
@@ -104,6 +67,43 @@ const CrearTurnos = () => {
         navigate("/");
       });
   }, []);
+
+  const [turno, setTurno] = useState({
+    date: "",
+    time: "",
+    description: "",
+    userId: usuario.id,
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setTurno({
+      ...turno,
+      [name]: value,
+    });
+  };
+
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await axios.post("http://localhost:3000/appointments/schedule", turno);
+
+      Swal.fire({
+        title: "¡Turno Creado!",
+        text: "Tu turno fue guardado correctamente",
+        icon: "success",
+      });
+    } catch (error) {
+      console.error("Error al crear el turno:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Hubo un error al crear el turno",
+        icon: "error",
+      });
+    }
+  };
 
   return (
     <form onSubmit={handleOnSubmit} className={styles.containerForm}>
